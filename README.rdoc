@@ -115,12 +115,22 @@ layouts that are stored in DB:
       Content
     <% end %>
 
+== Credits
+
+This plugin was originally written by Maxim Culkin 
+(maxim_culkin@gmail.com)
+
+Forked by Jeff Wigal (jeff@referee-assistant.com), patched to be 
+compatible with Rails 2.2+
 
 == Download
 
-Download it from http://rubyforge.org/projects/nested-layouts/ or via Rails plugin script:
-  ./script/plugin install svn://rubyforge.org/var/svn/nested-layouts/trunk/nested_layouts
+ ./script/plugin install git://github.com/jwigal/nested_layouts.git
+
+Original project page: 
+ http://rubyforge.org/projects/nested-layouts/ 
 
 == Bugs & Feedback
 
-If you encounter any bugs or has some feature proposal, feel free to email it to maxim.kulkin@gmail.com.
+If you encounter any bugs or has some feature proposal, feel free to 
+email it to jeff@referee-assistant.com.
