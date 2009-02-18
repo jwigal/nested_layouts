@@ -6,31 +6,40 @@ class TestController < ActionController::Base
   layout 'inner'
   
   def deep_layout
-    render :layout => 'deep'
+    render :action => "deep_layout", :layout => 'deep'
   end
   
   def shared_data
     @data1 = '123'
     @data2 = 'abc'
-    render :layout => 'shared_data_inner'
+    render :action => "shared_data", :layout => 'shared_data_inner'
+
+    #render :template => 'layouts/shared_data_inner'
   end
   
   def instance_passing
-    render :layout => 'instance_inner'
+    render :action => "instance_passing", :layout => 'instance_inner'
+    #render :template => 'layouts/instance_inner'
   end
   
   def content_for_passing
-    render :layout => 'content_for_inner'
+    render :action => "content_for_passing", :layout => 'content_for_inner'
+    #render :template => 'layouts/content_for_inner'
   end
 
   def inline_layout
     @inline_layout = '<outer><%= yield %></outer>'
-    render :layout => 'inline_inner'
+    render  :action => "inline_layout", :layout => "inline_inner"
+    #render :action => @inline_layout, :layout => 'inline_inner'
+   # render :template => 'layouts/inline_inner'
+  end
+
+  def simple
   end
 end
 
-TestController.template_root = File.dirname(__FILE__) + '/fixtures'
-ActionController::Base.ignore_missing_templates = false
+TestController.view_paths = File.dirname(__FILE__) + '/fixtures'
+#ActionController::Base.ignore_missing_templates = false
 ActionController::Routing::Routes.draw do |map|
   map.connect '/:controller/:action'
 end

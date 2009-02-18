@@ -1,3 +1,4 @@
+require 'action_pack/version'
 module ActionView #:nodoc:
   module Helpers #:nodoc:
     module NestedLayoutsHelper
@@ -10,17 +11,22 @@ module ActionView #:nodoc:
       def inside_layout(layout, &block)
         layout = layout.include?('/') ? layout : "layouts/#{layout}"
         @template.instance_variable_set('@content_for_layout', capture(&block))
-        concat(
-          @template.render( :file => layout, :user_full_path => true ),
-          block.binding
-        )
+        if ActionPack::VERSION::STRING.to_f >= 2.2
+          concat( @template.render( :file => layout, :use_full_path => true ))
+        else
+          concat( @template.render( :file => layout, :use_full_path => true ), block.binding)
+        end
       end
 
       # Wrap part of the template into inline layout.
       # Same as +inside_layout+ but takes layout template content rather than layout template name.
       def inside_inline_layout(template_content, &block)
         @template.instance_variable_set('@content_for_layout', capture(&block))
-        concat( @template.render( :inline => template_content ), block.binding )
+        if ActionPack::VERSION::STRING.to_f >= 2.2
+          concat( @template.render( :inline => template_content ))
+        else
+          concat( @template.render( :inline => template_content ), block.binding)
+        end
       end
     end
   end
